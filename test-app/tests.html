@@ -1,0 +1,54 @@
+<head>
+  <title>Lookback Dropdowns for Meteor</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,900,400italic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+  <header role="banner">
+    <h1>Dropdowns for Meteor</h1>
+
+    <ul class="list horizontal-list">
+      <li><a href="http://github.com/lookback/meteor-dropdowns">GitHub</a></li>
+      <li><a href="http://atmosphere.com/lookback/dropdowns">Atmosphere</a></li>
+      <li><a href="https://github.com/lookback/meteor-dropdowns/tree/master/test-app">Source for this demo</a></li>
+    </ul>
+  </header>
+
+  <main role="main">
+
+    <section>
+      <h2>Basics</h2>
+
+      <div class="test-area dropdown-container">
+        {{#dropdownTrigger name="testDropdown1"}}
+        <button id="dropdown1">Trigger #1</button>
+        {{/dropdownTrigger}}
+
+        {{#dropdown name="testDropdown1"}}
+          <p>Hello world</p>
+        {{/dropdown}}
+      </div>
+
+{{#markdown}}
+Simply use the templates `dropdownTrigger` and `dropdown`
+in order to wrap the triggering element and the dropdown:
+
+```html
+{{#dropdownTrigger name="dropdownTest"}}
+  <button>Trigger #1</button>
+{{/dropdownTrigger}}
+
+<!-- Somewhere else -->
+{{#dropdown name="dropdownTest"}}
+  <p>Hello world</p>
+{{/dropdown}}
+```
+{{/markdown}}
+    </section>
+
+  </main>
+</body>

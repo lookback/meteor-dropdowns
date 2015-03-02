@@ -1,0 +1,42 @@
+@mixin arrow($size, $color, $direction: up, $height: $size, $width: $size, $equilateral: true) {
+  width: 0;
+  height: 0;
+  border: solid transparent;
+
+  @if $direction == up {
+    border-width: 0 $width $height $width;
+    border-bottom-color: $color;
+    @if $equilateral == true {
+      border-bottom-width: $size * 2 * 0.866;
+    }
+  }
+  @if $direction == down {
+    border-width: $height $width 0 $width;
+    border-top-color: $color;
+    @if $equilateral == true {
+      border-top-width: $size * 2 * 0.866;
+    }
+  }
+  @if $direction == left {
+    border-width: $height $width $height 0;
+    border-right-color: $color;
+    @if $equilateral == true {
+      border-right-width: $size * 2 * 0.866;
+    }
+  }
+  @if $direction == right {
+    border-width: $height 0 $height $width;
+    border-left-color: $color;
+    @if $equilateral == true {
+      border-left-width: $size * 2 * 0.866;
+    }
+  }
+}
+
+@mixin truncate($max: 100%) {
+  display: inline-block;
+  max-width: $max;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

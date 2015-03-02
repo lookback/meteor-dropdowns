@@ -1,0 +1,28 @@
+<template name="dropdown">
+  {{#momentum plugin='dropdown'}}
+    {{#if show }}
+    <div role="menu"
+         class="dropdown {{toSnakeCase this.name}} {{toSnakeCase this.classes}}"
+         id="{{toSnakeCase this.name}}"
+         style="position: absolute; left: {{position.x}}px; top: {{position.y}}px;"
+         {{attributes}}
+         >
+      <div class="dropdown__arrow"></div>
+
+      {{#if UI.contentBlock}}
+        {{ > UI.contentBlock ..}}
+      {{else}}
+        {{ > Template.dynamic template=templateOrName data=..}}
+      {{/if}}
+    </div>
+    {{/if}}
+  {{/momentum}}
+</template>
+
+<template name="dropdownTrigger">
+  {{#if UI.contentBlock}}
+    {{ > UI.contentBlock this}}
+  {{else}}
+    {{ > Template.dynamic template=this.name}}
+  {{/if}}
+</template>

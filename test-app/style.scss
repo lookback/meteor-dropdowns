@@ -1,0 +1,98 @@
+$border-radius: 4px;
+$accent: #C0392B;
+$text-color: #222;
+$grey-dark: #999;
+$grey-light: #eee;
+
+$sans: 'Helvetica Neue', sans-serif;
+$serif: 'Playfair Display', serif;
+$mono: Menlo, Monaco, monospace;
+
+@import "dropdowns";
+
+html {
+  -webkit-font-smoothing: antialiased;
+  width: 90%;
+  line-height: 1.5;
+  margin: 0 auto;
+  max-width: 40rem;
+  font-family: $sans;
+}
+
+a {
+  color: $accent;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+p, pre {
+  margin: 0 0 1.618rem;
+}
+
+pre, code {
+  font-family: $mono;
+  font-size: .9rem;
+  background: #f3f3f3;
+}
+
+code {
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+pre {
+  border-radius: 6px;
+  padding: 1rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+
+  code {
+    padding: 0;
+  }
+}
+
+h1, h2 {
+  font-family: $serif;
+  text-align: center;
+}
+
+h1 {
+  font-size: 4em;
+}
+
+h2 {
+  font-weight: normal;
+  font-style: italic;
+  font-size: 2em;
+}
+
+[role="banner"] {
+  .list {
+    justify-content: center;
+  }
+}
+
+[role="main"] {
+  .test-area {
+    text-align: center;
+  }
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.horizontal-list {
+  display: flex;
+
+  li:not(:last-child)::after {
+    content: '·';
+    display: inline-block;
+    padding: 0 5px 0 2px;
+    color: #aaa;
+  }
+}

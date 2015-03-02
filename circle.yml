@@ -1,0 +1,11 @@
+dependencies:
+  override:
+    - curl https://install.meteor.com | /bin/sh
+    - npm install spacejam
+
+test:
+  override:
+    - ./node_modules/spacejam/bin/spacejam test-packages ./
+    - meteor --test:
+      pwd:
+        "test-app"

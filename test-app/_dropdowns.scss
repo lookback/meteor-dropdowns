@@ -1,0 +1,222 @@
+/* =DROPDOWNS
+--------------------------------------------- */
+
+@import "mixins";
+
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown {
+  $border: #dadada;
+
+  border-radius: $border-radius;
+  font-family: $sans;
+  background-color: #fff;
+  position: absolute;
+  padding: 1rem;
+  z-index: 1001;
+  // For opening transition
+  transform-origin: center top;
+  border: 1px solid $border;
+
+  box-shadow: rgba(#000, 0.2) 0 2px 3px,
+              rgba(#000, 0.08) 0 4px 20px;
+  // Notch down a bit for space for arrow
+  top: 120%;
+
+  &.dropdown--tight {
+    padding: 0;
+    border: 0;
+  }
+
+  &[data-dropdown-align="right"] {
+    // Arrow
+    .dropdown__arrow {
+      right: 1rem;
+      left: auto;
+    }
+  }
+
+  &[data-dropdown-align="left"] {
+    // Arrow
+    .dropdown__arrow {
+      left: 1rem;
+    }
+  }
+
+  p {
+    margin: 0 0 .5em;
+  }
+
+  .dropdown__scroller {
+    overflow-y: scroll;
+    max-height: 71vh;
+  }
+
+  .dropdown__show-more {
+    color: #555;
+    font-size: to_rem(12);
+    font-weight: 500;
+
+    &:hover,
+    &:hover .icon {
+      color: $accent;
+    }
+
+    &:hover .icon {
+      transform: scale(1.2);
+    }
+
+    .icon {
+      color: #999;
+      position: relative;
+      top: 2px;
+      transition: transform .2s ease-out;
+    }
+  }
+
+  &.dropdown--menu {
+    padding: 3px 0;
+    min-width: 0;
+    font-size: .9rem;
+
+    .dropdown__heading {
+      margin: .2rem 0;
+      color: $grey-dark;
+      font-size: to_rem(12);
+      padding: 0 .5rem;
+    }
+
+    .no-content {
+      font-size: to_rem(12);
+      margin: .5rem 0;
+      color: #666;
+    }
+  }
+
+  .dropdown__menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    [role="menuItem"] {
+      width: 100%;
+
+      &.dropdown__separator {
+        border-top: 1px solid #f0f0f0;
+        padding-top: .5em;
+        margin-top: .6em;
+      }
+
+      &.nav--current {
+        a,
+        a:hover,
+        a:active,
+        a:focus {
+          color: $grey-dark;
+          cursor: default;
+          background: none;
+        }
+      }
+
+      a {
+        @include truncate;
+        display: block;
+        padding: .3em 1em;
+        color: lighten($text-color, 10%);
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+          color: $accent;
+          outline: 0;
+          background-color: rgba($grey-light, .4);
+        }
+
+        &:active {
+          background-color: rgba($grey-light, .7);
+        }
+
+        // Flush icons vertically
+        .icon {
+          width: 1.1rem;
+          margin-right: .2rem;
+          margin-left: -.1rem;
+          position: relative;
+          top: 1px;
+        }
+      }
+    }
+  }
+
+  input[type="search"].dropdown__filter {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    box-shadow: none;
+    padding-left: 1.8rem;
+    padding-top: 0;
+    border-bottom: 1px solid darken($grey-light, 2%);
+    border-radius: 0;
+
+    & ~ .icon-search {
+      position: absolute;
+      left: 0.5rem;
+      top: 0.6rem;
+      font-size: 0.9rem;
+      color: #888;
+      transition: color .2s ease-out;
+    }
+
+    &:focus ~ .icon-search {
+      color: #666;
+    }
+  }
+
+  .dropdown__arrow {
+    $size: 6px;
+
+    left: calc(50% - #{$size});
+    top: -$size;
+    position: absolute;
+    @include arrow($size: $size, $color: $border, $equilateral: false);
+    z-index: 10;
+
+    &::before {
+      content: '';
+      position: absolute;
+      @include arrow($size: $size+1px, $color: #fff, $equilateral: false);
+      left: calc(50% - #{$size+1px});
+      top: 1px;
+      z-index: 9;
+    }
+  }
+}
+
+.dropdown__trigger {
+  color: $text-color;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: none;
+
+    [class*="icon-arrow"] {
+      fill: $accent;
+    }
+  }
+
+  [class*="icon-arrow"] {
+    margin-left: .2rem;
+    position: relative;
+    top: 3px;
+    transition: transform .3s ease-out,
+                fill .2s ease-out;
+  }
+
+  // Open dropdown
+  &.dropdown--open [class*="icon-arrow"] {
+    transform: rotateX(180deg);
+    fill: $accent;
+  }
+}
