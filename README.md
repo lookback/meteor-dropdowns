@@ -1,5 +1,7 @@
 # Reactive dropdowns for Meteor
 
+[![Circle CI](https://circleci.com/gh/lookback/meteor-dropdowns.svg?style=svg)](https://circleci.com/gh/lookback/meteor-dropdowns)
+
 A barebones dropdowns package that's doing it the "Meteor Way".
 
 ## How to use
