@@ -27,7 +27,7 @@ launch-screen@1.0.1
 less@1.0.12
 livedata@1.0.12
 logging@1.0.6
-lookback:dropdowns@0.4.1
+lookback:dropdowns@1.0.0
 markdown@1.0.3
 meteor@1.1.4
 meteor-platform@1.2.1

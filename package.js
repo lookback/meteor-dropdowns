@@ -3,7 +3,7 @@ var where = 'client';
 Package.describe({
   name: 'lookback:dropdowns',
   summary: 'Reactive dropdowns for Meteor.',
-  version: '0.4.1',
+  version: '1.0.0',
   git: 'http://github.com/lookback/meteor-dropdowns'
 });
 

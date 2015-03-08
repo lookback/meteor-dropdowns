@@ -216,6 +216,7 @@ No CSS styling is provided with this dropdown package – it's up to you to styl
 
 ## Version history
 
+- `1.0.0` - Stable release.
 - `0.4.1`
   - **Fix:** The properties `x, y, top, left` are now flattened (before, they were in properties `position` and `offset` respectively).
   - **Fix:** Said properties are converted to `Numbers` when creating a `Dropdown`.
