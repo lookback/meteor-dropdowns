@@ -14,41 +14,354 @@
     <ul class="list horizontal-list">
       <li><a href="http://github.com/lookback/meteor-dropdowns">GitHub</a></li>
       <li><a href="http://atmosphere.com/lookback/dropdowns">Atmosphere</a></li>
-      <li><a href="https://github.com/lookback/meteor-dropdowns/tree/master/test-app">Source for this demo</a></li>
+      <li><a href="https://github.com/lookback/meteor-dropdowns/tree/master/test-app">Source for this site</a></li>
     </ul>
+
+    <p class="intro">
+      Solid, fully customizable, reactive dropdowns for Meteor.
+    </p>
+
+    <ol class="toc">
+      <li><a href="#basics">Basics</a></li>
+      <li><a href="#arguments">Additional Arguments</a></li>
+      <li><a href="#markup-classes">Markup &amp; Classes</a></li>
+      <li><a href="#helpers">Helpers</a></li>
+      <li><a href="#data">Data Contexts</a></li>
+      <li><a href="#api">API</a></li>
+      <li><a href="#animation">Animation</a></li>
+      <li><a href="#styling">Styling</a></li>
+    </ol>
   </header>
 
   <main role="main">
 
-    <section>
-      <h2>Basics</h2>
-
-      <div class="test-area dropdown-container">
-        {{#dropdownTrigger name="testDropdown1"}}
-        <button id="dropdown1">Trigger #1</button>
-        {{/dropdownTrigger}}
-
-        {{#dropdown name="testDropdown1"}}
-          <p>Hello world</p>
-        {{/dropdown}}
-      </div>
-
-{{#markdown}}
-Simply use the templates `dropdownTrigger` and `dropdown`
-in order to wrap the triggering element and the dropdown:
-
-```html
-{{#dropdownTrigger name="dropdownTest"}}
-  <button>Trigger #1</button>
-{{/dropdownTrigger}}
-
-<!-- Somewhere else -->
-{{#dropdown name="dropdownTest"}}
-  <p>Hello world</p>
-{{/dropdown}}
-```
-{{/markdown}}
-    </section>
+    {{ > content }}
 
   </main>
 </body>
+
+<template name="content">
+  <section>
+    <h2 id="basics">Basics</h2>
+
+    <p>
+      A dropdown consist of a <strong>trigger</strong> and the actual <strong>dropdown content</strong>. They are wrapped in Meteor template helpers, in order to create contained components. The templates are:
+    </p>
+
+    <ul>
+      <li><code>dropdownTrigger</code></li>
+      <li><code>dropdown</code></li>
+    </ul>
+
+    <p>
+      Meteor's template helpers can take a bunch of arguments for customization, but the only <em>required</em> one for the dropdowns to work is the <code>name</code> argument, which takes a string which should be <strong>unique</strong> in order to identify the dropdown.
+    </p>
+
+    <div class="test-area dropdown-container">
+      {{#dropdownTrigger name="testDropdown1"}}
+        <button id="dropdown1">Trigger #1</button>
+      {{/dropdownTrigger}}
+
+      {{#dropdown name="testDropdown1"}}
+        <p>Hello world</p>
+      {{/dropdown}}
+    </div>
+
+    <p>
+      Simply use the templates <code>dropdownTrigger</code> and <code>dropdown</code> in order to wrap the triggering element and the dropdown:
+    </p>
+
+<pre><code class="html">&#123;&#123;#dropdownTrigger name="dropdownTest" &#125;&#125;
+  &lt;button&gt;Trigger #1&lt;/button&gt;
+&#123;&#123;/dropdownTrigger&#125;&#125;
+
+&#123;&#123;#dropdown name="dropdownTest"&#125;&#125;
+  &lt;p&gt;Hello world&lt;/p&gt;
+&#123;&#123;/dropdown&#125;&#125;
+</code></pre>
+
+    <p>
+      You can also use a separate template for the dropdown and dropdown trigger content:
+    </p>
+
+    <div class="test-area dropdown-container">
+      {{ > dropdownTrigger name="testDropdown2" template="testDropdownTrigger" }}
+      {{ > dropdown name="testDropdown2"}}
+    </div>
+
+<pre><code class="html">&#123;&#123; &gt; dropdownTrigger name="testDropdown2" template="testDropdownTrigger" &#125;&#125;
+
+&#123;&#123; &gt; dropdown name="testDropdown2" &#125;&#125;
+
+&lt;!-- Somewhere else .. --&gt;
+
+&lt;template name=&quot;testDropdownTrigger&quot;&gt;
+  &lt;button&gt;Trigger #2&lt;/button&gt;
+&lt;/template&gt;
+
+&lt;template name=&quot;testDropdown2&quot;&gt;
+  &lt;p&gt;External content, yo.&lt;/p&gt;
+&lt;/template&gt;
+</code></pre>
+
+    <p>Note that <code>dropdownTrigger</code> needs the template name in the <code>template</code> argument.</p>
+
+    <h2 id="arguments">Additional arguments</h2>
+
+    <p>The <code>dropdown</code> helper takes additional arguments for positioning and custom classes. The names are:</p>
+
+    <dl>
+      <dt><code>align</code></dt>
+      <dd>Defaults to <code>center</code>. Can also be <code>left</code> or <code>right</code>.</dd>
+
+      <dt><code>left</code></dt>
+      <dd>Left offset in pixels. Defaults to <code>0</code>.</dd>
+
+      <dt><code>top</code></dt>
+      <dd>Top offset in pixels. Defaults to <code>10</code>.</dd>
+
+      <dt><code>classes</code></dt>
+      <dd>Additional class names for the dropdown. None as default.</dd>
+    </dl>
+
+    <div class="test-area dropdown-container">
+      {{#dropdownTrigger name="testDropdownRight" }}
+        <button>Right aligned</button>
+      {{/dropdownTrigger}}
+
+      {{#dropdown name="testDropdownRight" align="right"}}
+        <p>To the right.</p>
+      {{/dropdown}}
+    </div>
+
+    <div class="test-area dropdown-container">
+      {{#dropdownTrigger name="testDropdownLeft" }}
+        <button>Left aligned</button>
+      {{/dropdownTrigger}}
+
+      {{#dropdown name="testDropdownLeft" align="left"}}
+        <p>To the left.</p>
+      {{/dropdown}}
+    </div>
+
+    <div class="test-area dropdown-container">
+      {{#dropdownTrigger name="testDropdownCustomOffset" }}
+        <button>With offset and classes</button>
+      {{/dropdownTrigger}}
+
+      {{#dropdown name="testDropdownCustomOffset" top="20" classes="custom-class another-one"}}
+        <p>20 px top offset.</p>
+      {{/dropdown}}
+    </div>
+
+    <pre><code>&#123;&#123;#dropdownTrigger name="testDropdown3"&#125;&#125;
+  &lt;button&gt;Custom dropdown&lt;/button&gt;
+&#123;&#123;/dropdownTrigger&#125;&#125;
+
+&#123;&#123;#dropdown name="testDropdown3" align="right" top="20" left="10" classes="custom-class another-one"&#125;&#125;
+  &lt;p&gt;Custom dropdown.&lt;/p&gt;
+&#123;&#123;/dropdown&#125;&#125;</code></pre>
+
+
+    <h2 id="markup-classes">Markup &amp; Classes</h2>
+
+    <p>
+      The <code>dropdownTrigger</code> template helper doesn't produce any extra HTML around your content. <code>dropdown</code> on the other hand produces the following HTML:
+    </p>
+
+    <pre><code class="html">&#123;&#123;#dropdownTrigger&#125;&#125;
+&lt;button&gt;A trigger&lt;/button&gt;
+&#123;&#123;/dropdownTrigger&#125;&#125;
+
+&lt;!-- Produces: --&gt;
+
+&lt;button class=&quot;dropdown__trigger&quot;&gt;A trigger&lt;/button&gt;
+
+&#123;&#123;#dropdown name="testDropdown4" align="center" top="20" left="10" classes="custom-class"&#125;&#125;
+  &lt;!-- Content [..] --&gt;
+&#123;&#123;/dropdown&#125;&#125;
+
+&lt;!-- Produces: --&gt;
+
+&lt;div role=&quot;menu&quot;
+  class=&quot;dropdown test-dropdown4 custom-class&quot;
+  id=&quot;test-dropdown4&quot;
+  style=&quot;position: absolute; left: XXpx; top: XXpx;&quot;
+  data-dropdown-align=&quot;center&quot;
+  data-dropdown-left=&quot;10&quot;
+  data-dropdown-top=&quot;20&quot;&gt;
+
+  &lt;div class=&quot;dropdown-arrow&quot;&gt;&lt;/div&gt;
+
+    &lt;!-- Content [..] --&gt;
+&lt;/div&gt;</code></pre>
+
+    <p>
+      As shown, <code>align</code>, <code>left</code> and <code>top</code> produces corresponding <code>data-dropdown-</code> attributes in the markup, handy for custom CSS styling. The dropdown's name will be the <code>id</code> attribute and applied as a class.
+    </p>
+
+    <p>It is <strong>recommended</strong> to wrap both the trigger and dropdown markup in a container element with relative positioning.</p>
+
+    <p>
+      Please note that the <code>name</code> template argument will be present as <code>id</code> and <code>class</code> in <kbd>snake-case</kbd> form.
+    </p>
+
+    <h2 id="helpers">Helpers</h2>
+
+    <p>
+      In order to detect active, opened dropdowns, the global <code>dropdownIsActive</code> helper can be used:
+    </p>
+
+    <div class="test-area dropdown-container">
+      {{#dropdownTrigger name="testDropdown5" }}
+        <button class="{{#if dropdownIsActive 'testDropdown5'}}dropdown--open{{/if}}">A trigger</button>
+      {{/dropdownTrigger}}
+
+      {{#dropdown name="testDropdown5"}}
+        <p>A dropdown.</p>
+      {{/dropdown}}
+    </div>
+
+<pre><code class="html">&#123;&#123;#dropdownTrigger name="testDropdown5"&#125;&#125;
+  &lt;button class="&#123;&#123;#if dropdownIsActive 'testDropdown5'&#125;&#125;dropdown--open&#123;&#123;/if&#125;&#125;"&gt;A trigger&lt;/button&gt;
+&#123;&#123;/dropdownTrigger&#125;&#125;
+</code></pre>
+
+    <h2 id="data">Data Contexts</h2>
+
+    <p>
+      Both the dropdown and its trigger inherits the data context from its parent:
+    </p>
+
+    <div class="test-area dropdown-container">
+      {{ > testTemplate }}
+    </div>
+
+{{#markdown}}
+```coffeescript
+Template.testTemplate.helpers(
+  items: ['Foo', 'Bar', 'Baz']
+)
+```
+{{/markdown}}
+
+<pre><code class="html">&lt;template name=&quot;testTemplate&quot;&gt;
+  &#123;&#123;#dropdownTrigger name=&quot;testDropdown6&quot;&#125;&#125;
+    &lt;button&gt;Dropdown with data&lt;/button&gt;
+  &#123;&#123;/dropdownTrigger&#125;&#125;
+
+  &#123;&#123;#dropdown name=&quot;testDropdown6&quot; classes=&quot;dropdown--menu&quot; align=&quot;left&quot;&#125;&#125;
+    &lt;ul class=&quot;dropdown__menu&quot;&gt;
+    &#123;&#123;#each items&#125;&#125;
+      &lt;li role=&quot;menuItem&quot;&gt;&lt;a href=&quot;#&quot;&gt;&#123;&#123;this&#125;&#125;&lt;/a&gt;&lt;/li&gt;
+      &#123;&#123;/each&#125;&#125;
+    &lt;/ul&gt;
+  &#123;&#123;/dropdown&#125;&#125;
+&lt;/template&gt;</code></pre>
+
+    <div class="dropdown-container test-area">
+      {{#dropdownTrigger name="filterDropdown"}}
+        <button>Filter dropdown</button>
+      {{/dropdownTrigger}}
+
+      {{ > dropdown name="filterDropdown" classes="dropdown--menu" align="left"}}
+    </div>
+
+    <p>
+      One can build more complex components from this simple dropdown concept, such as filterables.
+    </p>
+
+    <h2 id="api">API</h2>
+
+    <p>This package exports a namespaced object: <code>Dropdowns</code>. By the power of reactivity, all dropdowns are based on an underlying data structure which stores its (quite minimal) state. When that data changes, for instance if the position is changed over an API call, the UI will react. The <code>Dropdowns</code> object has the following methods:</p>
+
+    {{#markdown}}
+```coffeescript
+# Manually create a dropdown with a name.
+Dropdowns.create('name', opts = {})
+
+# Get a the dropdown.
+Dropdowns.get('name')
+
+# Hide a dropdown.
+Dropdowns.hide('name')
+
+# Show a dropdown.
+Dropdowns.show('name')
+
+# Returns `true` if a dropdown is currently shown.
+Dropdowns.isShown('name')
+
+# Toggle a dropdown.
+Dropdowns.toggle('name')
+
+# Hide all dropdowns.
+Dropdowns.hideAll()
+
+# Destroy a dropdown.
+Dropdowns.remove()
+
+# Destroy all dropdowns.
+Dropdowns.removeAll()
+
+# Manually set a position of a dropdown.
+Dropdowns.setPosition('name', {x: Number, y: Number})
+
+# Hide all dropdowns except for `name`.
+Dropdowns.hideAllBut('name')
+```
+    {{/markdown}}
+
+    <h2 id="animation">Animation</h2>
+
+    <p>The dropdown uses the excellent <a href="https://github.com/percolatestudio/meteor-momentum/">Momentum</a> package for creating natural animations when toggled. This is built on Meteor's UI hooks, since the dropdown content actually is removed from the DOM when hidden.</p>
+
+    <p>For now, a default transition is bundled. In the future, users of this package will be able to write their own Momentum plugins and provide to the dropdown helper.</p>
+
+    <h2 id="styling">Styling</h2>
+
+    <p>No CSS styling is provided with this dropdown package – it's up to you to style the dropdown according to your needs. For a complete styling example, check out the <code>_dropdowns.scss</code> file in this <a href="https://github.com/lookback/meteor-dropdowns/tree/master/test-app">repository</a>.</p>
+  </section>
+
+  <footer role="contentInfo">
+    <p>Made by <a href="http://johanbrook.com">Johan Brook</a> at <a href="http://github.com/lookback">Lookback</a>.</p>
+  </footer>
+</template>
+
+<template name="testDropdownTrigger">
+  <button>Trigger #2</button>
+</template>
+
+<template name="testDropdown2">
+  <p>External content, yo.</p>
+</template>
+
+<template name="testTemplate">
+  {{#dropdownTrigger name="testDropdown6"}}
+    <button>Dropdown with data</button>
+  {{/dropdownTrigger}}
+
+  {{#dropdown name="testDropdown6" classes="dropdown--menu" align="left"}}
+    <ul class="dropdown__menu">
+      {{#each items}}
+      <li role="menuItem"><a href="#">{{this}}</a></li>
+      {{/each}}
+    </ul>
+  {{/dropdown}}
+</template>
+
+<template name="filterDropdown">
+  <input type="search" placeholder="Filter" class="dropdown__filter">
+
+  {{#if drinks.count}}
+    <ul class="dropdown__menu">
+      {{#each drinks}}
+      <li role="menuItem" class="{{#if isSelected}}selected{{/if}}">
+        <a href="#">{{name}}{{#if isSelected}}<span class="icon">✔︎</span>{{/if}}</a>
+      </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p class="no-content">No drinks found.</p>
+  {{/if}}
+</template>

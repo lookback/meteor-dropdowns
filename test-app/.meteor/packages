@@ -11,3 +11,5 @@ velocity:html-reporter
 coffeescript
 fourseven:scss
 markdown
+simple:highlight.js
+reactive-var

@@ -13,9 +13,9 @@
   border-radius: $border-radius;
   font-family: $sans;
   background-color: #fff;
-  position: absolute;
   padding: 1rem;
   z-index: 1001;
+  min-width: 150px;
   // For opening transition
   transform-origin: center top;
   border: 1px solid $border;
@@ -31,6 +31,8 @@
   }
 
   &[data-dropdown-align="right"] {
+    text-align: right;
+
     // Arrow
     .dropdown__arrow {
       right: 1rem;
@@ -39,6 +41,8 @@
   }
 
   &[data-dropdown-align="left"] {
+    text-align: left;
+
     // Arrow
     .dropdown__arrow {
       left: 1rem;
@@ -46,7 +50,7 @@
   }
 
   p {
-    margin: 0 0 .5em;
+    margin: 0;
   }
 
   .dropdown__scroller {
@@ -78,20 +82,13 @@
 
   &.dropdown--menu {
     padding: 3px 0;
-    min-width: 0;
     font-size: .9rem;
 
-    .dropdown__heading {
-      margin: .2rem 0;
-      color: $grey-dark;
-      font-size: to_rem(12);
-      padding: 0 .5rem;
-    }
-
     .no-content {
-      font-size: to_rem(12);
-      margin: .5rem 0;
-      color: #666;
+      font-size: .9rem;
+      margin: .5rem;
+      text-align: center;
+      color: #888;
     }
   }
 
@@ -109,7 +106,7 @@
         margin-top: .6em;
       }
 
-      &.nav--current {
+      &.selected {
         a,
         a:hover,
         a:active,
@@ -118,12 +115,20 @@
           cursor: default;
           background: none;
         }
+
+        .icon {
+          position: absolute;
+          right: .5rem;
+          top: .5rem;
+          font-size: .9em;
+        }
       }
 
       a {
         @include truncate;
         display: block;
         padding: .3em 1em;
+        position: relative;
         color: lighten($text-color, 10%);
 
         &:hover,
@@ -137,15 +142,6 @@
         &:active {
           background-color: rgba($grey-light, .7);
         }
-
-        // Flush icons vertically
-        .icon {
-          width: 1.1rem;
-          margin-right: .2rem;
-          margin-left: -.1rem;
-          position: relative;
-          top: 1px;
-        }
       }
     }
   }
@@ -155,22 +151,12 @@
     margin: 0;
     border: 0;
     box-shadow: none;
-    padding-left: 1.8rem;
-    padding-top: 0;
+    padding: 6px 6px 8px;
     border-bottom: 1px solid darken($grey-light, 2%);
     border-radius: 0;
 
-    & ~ .icon-search {
-      position: absolute;
-      left: 0.5rem;
-      top: 0.6rem;
-      font-size: 0.9rem;
-      color: #888;
-      transition: color .2s ease-out;
-    }
-
-    &:focus ~ .icon-search {
-      color: #666;
+    &:focus {
+      outline: 0;
     }
   }
 
@@ -212,11 +198,5 @@
     top: 3px;
     transition: transform .3s ease-out,
                 fill .2s ease-out;
-  }
-
-  // Open dropdown
-  &.dropdown--open [class*="icon-arrow"] {
-    transform: rotateX(180deg);
-    fill: $accent;
   }
 }

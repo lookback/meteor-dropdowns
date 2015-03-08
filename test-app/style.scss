@@ -17,6 +17,7 @@ html {
   margin: 0 auto;
   max-width: 40rem;
   font-family: $sans;
+  color: #222;
 }
 
 a {
@@ -28,14 +29,27 @@ a {
   }
 }
 
-p, pre {
-  margin: 0 0 1.618rem;
+p,
+pre,
+ul,
+ol {
+  margin: 1rem 0 2.5rem;
+}
+
+ul {
+  list-style-type: circle;
+}
+
+dd {
+  font-size: .9rem;
+  color: #555;
 }
 
 pre, code {
   font-family: $mono;
   font-size: .9rem;
   background: #f3f3f3;
+  color: #444;
 }
 
 code {
@@ -45,13 +59,22 @@ code {
 
 pre {
   border-radius: 6px;
-  padding: 1rem;
-  margin-left: -1rem;
-  margin-right: -1rem;
+  padding: 3rem;
+  margin-left: -3rem;
+  margin-right: -3rem;
+  line-height: 1.8;
+  overflow-x: auto;
 
   code {
     padding: 0;
   }
+}
+
+code.hljs {
+  overflow-x: visible;
+  padding: 0;
+  display: inherit;
+  background: none;
 }
 
 h1, h2 {
@@ -66,7 +89,16 @@ h1 {
 h2 {
   font-weight: normal;
   font-style: italic;
-  font-size: 2em;
+  font-size: 2.5em;
+  margin: 1.5em 0;
+
+  &::before {
+    content: '';
+    display: block;
+    border-top: 1px solid #222;
+    width: 8rem;
+    margin: 5rem auto 3rem;
+  }
 }
 
 [role="banner"] {
@@ -75,9 +107,41 @@ h2 {
   }
 }
 
-[role="main"] {
-  .test-area {
-    text-align: center;
+.intro {
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.test-area {
+  text-align: center;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+
+  .dropdown__trigger {
+    font-size: 1.1em;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #dadada;
+    padding: .4em .5em;
+    box-shadow: rgba(#000, .1) 0 1px 1px;
+
+    &:hover {
+      border-color: #ccc;
+      cursor: pointer;
+    }
+
+    &:active,
+    &:focus {
+      outline: 0;
+      background-color: #f8f8f8;
+    }
+
+    // Open dropdown
+    &.dropdown--open  {
+      background-color: #222;
+      color: #fff;
+      border-color: #222;
+    }
   }
 }
 
@@ -86,13 +150,33 @@ h2 {
   padding: 0;
 }
 
+.toc {
+  width: 25%;
+  margin: 0 auto;
+  list-style-type: upper-roman;
+}
+
 .horizontal-list {
   display: flex;
+  font-family: $serif;
+  font-size: 1.1em;
 
   li:not(:last-child)::after {
     content: '·';
     display: inline-block;
-    padding: 0 5px 0 2px;
+    padding: 0 8px;
     color: #aaa;
+  }
+}
+
+[role="contentInfo"] {
+  text-align: center;
+
+  &::before {
+    content: '';
+    display: block;
+    border-top: 1px solid #222;
+    width: 8rem;
+    margin: 5rem auto 3rem;
   }
 }

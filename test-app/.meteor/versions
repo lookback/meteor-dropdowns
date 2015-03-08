@@ -50,6 +50,7 @@ routepolicy@1.0.4
 sanjo:jasmine@0.12.4
 sanjo:karma@1.4.1
 session@1.0.5
+simple:highlight.js@1.0.9
 spacebars@1.0.5
 spacebars-compiler@1.0.4
 templating@1.0.11
