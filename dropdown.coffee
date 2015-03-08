@@ -238,19 +238,21 @@ $ ->
 
   # Isn't dropdown nor child of
   isDropdown = (el) ->
-    childOf(el, DROPDOWN) or el.is(DROPDOWN_TRIGGER)
+    childOf(el, DROPDOWN) or el.is(DROPDOWN) or el.is(DROPDOWN_TRIGGER)
 
   isInput = (el) ->
     node = el.get(0)
     node.tagName is 'INPUT' or node.tagName is 'TEXTAREA'
 
-  $(document).on 'keyup', (evt) ->
+  $(document).on 'keydown', (evt) ->
     # Close on Esc
     if evt.keyCode is 27
       el = $(evt.target)
 
-      # Don't close dropdowns if we're writing something.
-      if not isInput(el) and not isDropdown(el)
+      # Don't close dropdowns if we're writing something with content.
+      if isDropdown(el)
+        return if isInput(el) and el.val() isnt ''
+
         Dropdowns.hideAll()
 
   $(document).on 'click', (evt) ->
