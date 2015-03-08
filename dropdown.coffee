@@ -182,25 +182,21 @@ Template.dropdownTrigger.helpers(
 positionDropdown = (key, element) ->
   return () ->
     dropdown = Dropdowns.get(key)
-    return if not dropdown.showing
+    return unless dropdown.showing
 
     $dropdown = $("##{toSnakeCase(key)}")
     $el = $(element)
 
     if $dropdown.length is 0
-      return console.error 'Couldn\'t find a dropdown: ' + key
+      return console.error 'Dropdowns: Couldn\'t find a dropdown: ' + key
     if $el.length is 0
-      return console.error 'Couldn\'t find the trigger element for ' + key
+      return console.error 'Dropdowns: Couldn\'t find the trigger element for ' + key
 
     align = dropdown.align
     offLeft = dropdown.left
     offTop = dropdown.top
 
     ref = $el.position()
-
-    # position.top = switch direction
-    #   when 'w', 'e' then center vertically $dropdown, $el
-    #   when 's' then position.top + $el.outerHeight() + offTop
 
     if align is 'left'
       left = ref.left - offLeft
@@ -224,8 +220,7 @@ Template.dropdownTrigger.events(
     Tracker.afterFlush positionDropdown(name, tmpl.find(':first'))
 )
 
-Template.registerHelper 'dropdownIsActive', (name) ->
-  isActive(name)
+Template.registerHelper 'dropdownIsActive', isActive
 
 $ ->
 
