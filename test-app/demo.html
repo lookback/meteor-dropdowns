@@ -146,7 +146,7 @@
 
     <div class="test-area dropdown-container">
       {{#dropdownTrigger name="testDropdownCustomOffset" }}
-        <button>With offset and classes</button>
+        <button id="customClassesTrigger">With offset and classes</button>
       {{/dropdownTrigger}}
 
       {{#dropdown name="testDropdownCustomOffset" top="20" classes="custom-class another-one"}}
@@ -348,7 +348,7 @@ Dropdowns.hideAllBut('name')
 
 <template name="testTemplate">
   {{#dropdownTrigger name="testDropdown6"}}
-    <button>Dropdown with data</button>
+    <button id="custom-data-trigger">Dropdown with data</button>
   {{/dropdownTrigger}}
 
   {{#dropdown name="testDropdown6" classes="dropdown--menu" align="left"}}
