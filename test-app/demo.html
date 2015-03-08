@@ -277,10 +277,20 @@ Template.testTemplate.helpers(
 
     {{#markdown}}
 ```coffeescript
+# The foundational dropdown struct:
+{
+  showing: false
+  align: 'center'
+  x: 0
+  y: 0
+  top: 10
+  left: 0
+}
+
 # Manually create a dropdown with a name.
 Dropdowns.create('name', opts = {top: 10, left: 0, align: 'center'})
 
-# Get a the dropdown.
+# Get a dropdown by name.
 Dropdowns.get('name')
 
 # Hide a dropdown.

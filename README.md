@@ -172,6 +172,16 @@ One can build more complex components from this simple dropdown concept, such as
 This package exports a namespaced object: `Dropdowns`. By the power of reactivity, all dropdowns are based on an underlying data structure which stores its (quite minimal) state. When that data changes, for instance if the position is changed over an API call, the UI will react. The `Dropdowns` object has the following methods:
 
 ```coffeescript
+# The foundational dropdown struct:
+{
+  showing: false
+  align: 'center'
+  x: 0
+  y: 0
+  top: 10
+  left: 0
+}
+
 # Manually create a dropdown with a name.
 Dropdowns.create('name', opts = {top: 10, left: 0, align: 'center'})
 
