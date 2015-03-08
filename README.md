@@ -158,14 +158,18 @@ Template.testTemplate.helpers(
   {{/dropdownTrigger}}
 
   {{#dropdown name="testDropdown6" classes="dropdown--menu" align="left"}}
+
+    <ul class="dropdown__menu">
     {{#each items}}
       <li role="menuItem"><a href="#">{{this}}</a></li>
     {{/each}}
+    </ul>
+
   {{/dropdown}}
 </template>
 ```
 
-One can build more complex components from this simple dropdown concept, such as filterables.
+One can build more complex components from this simple dropdown concept, such as [filterables](http://dropdowns.meteor.com/#data).
 
 ### API
 
