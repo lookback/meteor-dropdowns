@@ -246,6 +246,21 @@ No CSS styling is provided with this dropdown package – it's up to you to styl
 - `0.2.0` **New:** Support for horizontal positioning.
 - `0.1.0` Initial commit.
 
+## Tests
+
+This package's API interface (methods on the `Dropdown` object) is unit tested in TinyTest (using MUnit). Those tests reside in `/tests`.
+
+```bash
+meteor test-packages ./
+```
+
+Furthermore, there are Jasmine Velocity integration tests in the demo app: `/test-app/tests`. These tests test the UI and template integration.
+
+```bash
+cd test-app
+meteor --test
+```
+
 ## Contributions
 
 Contributions are welcome. Please open issues and/or file Pull Requests.
