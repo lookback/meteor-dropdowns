@@ -6,6 +6,8 @@ A solid, fully customizable, reactive dropdowns package for Meteor.
 
 ## Install
 
+Install [`lookback:dropdowns`](http://atmospherejs.com/lookback/dropdowns) from Atmosphere:
+
 ```bash
 meteor add lookback:dropdowns
 ```
