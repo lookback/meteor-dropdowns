@@ -172,7 +172,7 @@ Template.dropdown.helpers
       return attrs
 
 Template.dropdownTrigger.rendered = ->
-  this.$(':first').addClass(DROPDOWN_TRIGGER.slice(1))
+  this.$('*').first().addClass(DROPDOWN_TRIGGER.slice(1))
 
 Template.dropdownTrigger.helpers(
   isActive: ->
@@ -217,7 +217,7 @@ Template.dropdownTrigger.events(
     Dropdowns.hideAllBut(name)
     Dropdowns.toggle(name)
 
-    Tracker.afterFlush positionDropdown(name, tmpl.find(':first'))
+    Tracker.afterFlush positionDropdown(name, tmpl.find(DROPDOWN_TRIGGER))
 )
 
 Template.registerHelper 'dropdownIsActive', isActive
