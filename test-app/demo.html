@@ -234,8 +234,10 @@
     </p>
 
     <div class="test-area dropdown-container">
-      {{ > testTemplate }}
+      {{ > testTemplate "testDropdown6" }}
     </div>
+
+<pre><code class="html">&#123;&#123; &gt; testTemplate &quot;testDropdown6&quot; &#125;&#125;</code></pre>
 
 {{#markdown}}
 ```coffeescript
@@ -246,11 +248,11 @@ Template.testTemplate.helpers(
 {{/markdown}}
 
 <pre><code class="html">&lt;template name=&quot;testTemplate&quot;&gt;
-  &#123;&#123;#dropdownTrigger name=&quot;testDropdown6&quot;&#125;&#125;
-    &lt;button&gt;Dropdown with data&lt;/button&gt;
+  &#123;&#123;#dropdownTrigger name=this&#125;&#125;
+    &lt;button&gt;Dropdown with &#123;&#123;items.length&#125;&#125; items&lt;/button&gt;
   &#123;&#123;/dropdownTrigger&#125;&#125;
 
-  &#123;&#123;#dropdown name=&quot;testDropdown6&quot; classes=&quot;dropdown--menu&quot; align=&quot;left&quot;&#125;&#125;
+  &#123;&#123;#dropdown name=this classes=&quot;dropdown--menu&quot; align=&quot;left&quot;&#125;&#125;
     &lt;ul class=&quot;dropdown__menu&quot;&gt;
       &#123;&#123;#each items&#125;&#125;
         &lt;li role=&quot;menuItem&quot;&gt;&lt;a href=&quot;#&quot;&gt;&#123;&#123;this&#125;&#125;&lt;/a&gt;&lt;/li&gt;
@@ -347,11 +349,11 @@ Dropdowns.hideAllBut('name')
 </template>
 
 <template name="testTemplate">
-  {{#dropdownTrigger name="testDropdown6"}}
-    <button id="custom-data-trigger">Dropdown with data</button>
+  {{#dropdownTrigger name=this}}
+    <button id="custom-data-trigger">Dropdown with {{items.length}} items</button>
   {{/dropdownTrigger}}
 
-  {{#dropdown name="testDropdown6" classes="dropdown--menu" align="left"}}
+  {{#dropdown name=this classes="dropdown--menu" align="left"}}
     <ul class="dropdown__menu">
       {{#each items}}
       <li role="menuItem"><a href="#">{{this}}</a></li>

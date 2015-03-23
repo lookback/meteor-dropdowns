@@ -63,3 +63,9 @@ if Meteor.isClient
       evt.preventDefault()
       Session.set 'selected', @name
   )
+
+
+  Template.testTemplate.events(
+    'click #custom-data-trigger': (evt, tmpl) ->
+      evt.preventDefault()
+  )
