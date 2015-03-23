@@ -8,7 +8,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.0.2');
+  api.versionsFrom('METEOR@0.9.2');
   api.use('percolate:momentum@0.7.2', where);
   api.use([
     'underscore',
