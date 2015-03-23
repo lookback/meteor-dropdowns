@@ -26,7 +26,8 @@ Dropdown = (opts = {}) ->
         if Match.test prop, Match.OneOf('x', 'y', 'top', 'left')
           obj[prop] = toIntOr opts[prop], obj[prop]
         else
-          obj[prop] = opts[prop]
+          if opts[prop] and _.isUndefined(opts[prop]) is false
+            obj[prop] = opts[prop]
 
     return obj
 
