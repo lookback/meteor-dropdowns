@@ -21,8 +21,8 @@
 
 <template name="dropdownTrigger">
   {{#if UI.contentBlock}}
-    {{ > UI.contentBlock this}}
+    {{ > UI.contentBlock ..}}
   {{else}}
-    {{ > Template.dynamic template=this.template}}
+    {{ > Template.dynamic template=this.template data=..}}
   {{/if}}
 </template>
