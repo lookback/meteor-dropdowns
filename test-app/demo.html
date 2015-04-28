@@ -62,7 +62,7 @@
         <button id="dropdown1">Trigger #1</button>
       {{/dropdownTrigger}}
 
-      {{#dropdown name="testDropdown1"}}
+      {{#dropdown name="testDropdown1" top="10"}}
         <p>Hello world</p>
       {{/dropdown}}
     </div>
@@ -86,7 +86,7 @@
 
     <div class="test-area dropdown-container">
       {{ > dropdownTrigger name="testDropdown2" template="testDropdownTrigger" }}
-      {{ > dropdown name="testDropdown2"}}
+      {{ > dropdown name="testDropdown2" top="10"}}
     </div>
 
 <pre><code class="html">&#123;&#123; &gt; dropdownTrigger name="testDropdown2" template="testDropdownTrigger" &#125;&#125;
@@ -118,7 +118,10 @@
       <dd>Left offset in pixels. Defaults to <code>0</code>.</dd>
 
       <dt><code>top</code></dt>
-      <dd>Top offset in pixels. Defaults to <code>10</code>.</dd>
+      <dd>Top offset in pixels. Defaults to <code>0</code>.</dd>
+
+      <dt><code>direction</code></dt>
+      <dd>Where to position the dropdown around the element. Can be one of <code>n</code>, <code>s</code>, <code>e</code>, <code>w</code>. Defaults to <code>s</code>.</dd>
 
       <dt><code>classes</code></dt>
       <dd>Additional class names for the dropdown. None as default.</dd>
@@ -129,7 +132,7 @@
         <button>Right aligned</button>
       {{/dropdownTrigger}}
 
-      {{#dropdown name="testDropdownRight" align="right"}}
+      {{#dropdown name="testDropdownRight" align="right" top="10"}}
         <p>To the right.</p>
       {{/dropdown}}
     </div>
@@ -139,7 +142,7 @@
         <button>Left aligned</button>
       {{/dropdownTrigger}}
 
-      {{#dropdown name="testDropdownLeft" align="left"}}
+      {{#dropdown name="testDropdownLeft" align="left" top="10"}}
         <p>To the left.</p>
       {{/dropdown}}
     </div>
@@ -149,8 +152,48 @@
         <button id="customClassesTrigger">With offset and classes</button>
       {{/dropdownTrigger}}
 
-      {{#dropdown name="testDropdownCustomOffset" top="20" classes="custom-class another-one"}}
+      {{#dropdown name="testDropdownCustomOffset" top="50" classes="custom-class another-one"}}
         <p>20 px top offset.</p>
+      {{/dropdown}}
+    </div>
+
+    <div class="test-area dropdown-container">
+      {{#dropdownTrigger name="testDropdownDirectionN" }}
+        <button>North direction</button>
+      {{/dropdownTrigger}}
+
+      {{#dropdown name="testDropdownDirectionN" direction="n" top="-10"}}
+        <p>Placed above trigger with <code>direction="n"</code>.</p>
+      {{/dropdown}}
+    </div>
+
+    <div class="test-area dropdown-container">
+      {{#dropdownTrigger name="testDropdownDirectionNR"}}
+        <button>North direction, aligned right</button>
+      {{/dropdownTrigger}}
+
+      {{#dropdown name="testDropdownDirectionNR" direction="n" align="right" top="-10"}}
+        <p>Placed above to right trigger with <code>direction="n" align="right"</code>.</p>
+      {{/dropdown}}
+    </div>
+
+    <div class="test-area dropdown-container">
+      {{#dropdownTrigger name="testDropdownDirectionE" }}
+        <button>East direction</button>
+      {{/dropdownTrigger}}
+
+      {{#dropdown name="testDropdownDirectionE" direction="e" left="10"}}
+        <p>Placed to the right of trigger with <code>direction="e"</code>.</p>
+      {{/dropdown}}
+    </div>
+
+    <div class="test-area dropdown-container">
+      {{#dropdownTrigger name="testDropdownDirectionW" }}
+        <button>West direction</button>
+      {{/dropdownTrigger}}
+
+      {{#dropdown name="testDropdownDirectionW" direction="w" left="-10"}}
+        <p>Placed to the left of trigger with <code>direction="w"</code>.</p>
       {{/dropdown}}
     </div>
 
@@ -158,7 +201,7 @@
   &lt;button&gt;Custom dropdown&lt;/button&gt;
 &#123;&#123;/dropdownTrigger&#125;&#125;
 
-&#123;&#123;#dropdown name="testDropdown3" align="right" top="20" left="10" classes="custom-class another-one"&#125;&#125;
+&#123;&#123;#dropdown name="testDropdown3" align="right" top="20" left="10" direction="n" classes="custom-class another-one"&#125;&#125;
   &lt;p&gt;Custom dropdown.&lt;/p&gt;
 &#123;&#123;/dropdown&#125;&#125;</code></pre>
 
@@ -217,7 +260,7 @@
         <button class="{{#if dropdownIsActive 'testDropdown5'}}dropdown--open{{/if}}">A trigger</button>
       {{/dropdownTrigger}}
 
-      {{#dropdown name="testDropdown5"}}
+      {{#dropdown name="testDropdown5" top="10"}}
         <p>A dropdown.</p>
       {{/dropdown}}
     </div>
@@ -266,7 +309,7 @@ Template.testTemplate.helpers(
         <button>Filter dropdown</button>
       {{/dropdownTrigger}}
 
-      {{ > dropdown name="filterDropdown" classes="dropdown--menu" align="left"}}
+      {{ > dropdown name="filterDropdown" classes="dropdown--menu" align="left" top="10"}}
     </div>
 
     <p>
@@ -353,7 +396,7 @@ Dropdowns.hideAllBut('name')
     <button id="custom-data-trigger">Dropdown with {{items.length}} items</button>
   {{/dropdownTrigger}}
 
-  {{#dropdown name=this classes="dropdown--menu" align="left"}}
+  {{#dropdown name=this classes="dropdown--menu" align="left" top="10"}}
     <ul class="dropdown__menu">
       {{#each items}}
       <li role="menuItem"><a href="#">{{this}}</a></li>

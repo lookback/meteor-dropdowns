@@ -3,6 +3,8 @@
 
 @import "mixins";
 
+$arrow-size: 8px;
+
 .dropdown-container {
   position: relative;
 }
@@ -30,6 +32,24 @@
     border: 0;
   }
 
+  &[data-dropdown-align="center"] {
+    .dropdown__arrow--left,
+    .dropdown__arrow--right {
+      top: calc(50% - #{$arrow-size});
+      &::before {
+        top: calc(50% - #{$arrow-size + 1px});
+      }
+    }
+
+    .dropdown__arrow--up,
+    .dropdown__arrow--down {
+      left: calc(50% - #{$arrow-size});
+      &::before {
+        left: calc(50% - #{$arrow-size + 1px});
+      }
+    }
+  }
+
   &[data-dropdown-align="right"] {
     text-align: right;
 
@@ -37,6 +57,9 @@
     .dropdown__arrow {
       right: 1rem;
       left: auto;
+      &::before {
+        right: -$arrow-size - 1px;
+      }
     }
   }
 
@@ -46,6 +69,9 @@
     // Arrow
     .dropdown__arrow {
       left: 1rem;
+      &::before {
+        left: -$arrow-size - 1px;
+      }
     }
   }
 
@@ -161,21 +187,46 @@
   }
 
   .dropdown__arrow {
-    $size: 6px;
-
-    left: calc(50% - #{$size});
-    top: -$size;
     position: absolute;
-    @include arrow($size: $size, $color: $border, $equilateral: false);
     z-index: 10;
 
     &::before {
       content: '';
       position: absolute;
-      @include arrow($size: $size+1px, $color: #fff, $equilateral: false);
-      left: calc(50% - #{$size+1px});
       top: 1px;
       z-index: 9;
+    }
+
+    @each $dir in up, down, left, right {
+      &.dropdown__arrow--#{$dir} {
+        @include arrow($direction: $dir, $size: $arrow-size, $color: $border, $equilateral: false);
+
+        @if $dir == up {
+          top: -$arrow-size;
+        }
+        @else if $dir == down {
+          bottom: -$arrow-size;
+          &::before {
+            top: -$arrow-size - 2px;
+          }
+        }
+        @else if $dir == right {
+          right: -$arrow-size;
+          &::before {
+            right: 1px;
+          }
+        }
+        @else if $dir == left {
+          left: -$arrow-size;
+          &::before {
+            left: 1px;
+          }
+        }
+
+        &::before {
+          @include arrow($direction: $dir, $size: $arrow-size+1px, $color: #fff, $equilateral: false);
+        }
+      }
     }
   }
 }

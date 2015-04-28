@@ -77,16 +77,16 @@ The `dropdown` helper takes additional arguments for positioning and custom clas
 
 - `align` - Defaults to `center`. Can also be `left` or `right`.
 - `left` - Left offset in pixels. Defaults to `0`.
-- `top` - Top offset in pixels. Defaults to `10`.
+- `top` - Top offset in pixels. Defaults to `0`.
 - `classes` - Additional class names for the dropdown. None as default.
-
+- `direction` - One of `n`, `s`, `e` or `w`. Where to position the dropdown around the element. Defaults to `s`.
 
 ```html
 {{#dropdownTrigger name="testDropdown3"}}
   <button>Custom dropdown</button>
 {{/dropdownTrigger}}
 
-{{#dropdown name="testDropdown3" align="right" top="20" left="10" classes="custom-class another-one"}}
+{{#dropdown name="testDropdown3" align="right" top="20" left="10" direction="n" classes="custom-class another-one"}}
   <p>Custom dropdown.</p>
 {{/dropdown}}
 ```
