@@ -7,7 +7,7 @@
          style="position: absolute; left: {{position.x}}px; top: {{position.y}}px;"
          {{attributes}}
          >
-      <div class="dropdown__arrow"></div>
+      <div class="dropdown__arrow dropdown__arrow--{{arrowDirection}}"></div>
 
       {{#if UI.contentBlock}}
         {{ > UI.contentBlock ..}}

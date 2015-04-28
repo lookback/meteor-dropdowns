@@ -5,14 +5,21 @@
 DROPDOWN_TRIGGER = '.dropdown__trigger'
 DROPDOWN = '.dropdown'
 
+Direction =
+  NORTH: 'n'
+  SOUTH: 's'
+  EAST: 'e'
+  WEST: 'w'
+
 # Dropdown factory function.
 Dropdown = (opts = {}) ->
   defaults =
     showing: false
+    direction: Direction.SOUTH
     align: 'center'
     x: 0
     y: 0
-    top: 10       # Offsets
+    top: 0       # Offsets
     left: 0
 
   toIntOr = (val, org) ->
@@ -134,16 +141,16 @@ center = (args) ->
 	middle - args[2] / 2
 
 horizontally = ($el, $reference) ->
-	[$reference.position().left, $reference.outerWidth(), $el.outerWidth()]
+  [$reference.position().left, $reference.outerWidth(), $el.outerWidth()]
 
 vertically = ($el, $reference) ->
-	[$reference.position().top, $reference.outerHeight(), $el.outerHeight()]
+  [$reference.position().top, $reference.outerHeight(), $el.outerHeight()]
 
 # Templates
 
 Template.dropdown.created = ->
   # Build a dropdown from template attributes.
-  opts = _.pick(@data, 'align', 'top', 'left')
+  opts = _.pick(@data, 'align', 'top', 'left', 'direction')
   Dropdowns.create(@data.name, opts)
 
 Template.dropdown.helpers
@@ -169,8 +176,19 @@ Template.dropdown.helpers
       attrs['data-dropdown-top'] = dropdown.top
       attrs['data-dropdown-left'] = dropdown.left
       attrs['data-dropdown-align'] = dropdown.align
+      attrs['data-dropdown-direction'] = dropdown.direction
 
       return attrs
+
+  arrowDirection: ->
+    dropdown = Dropdowns.get(@name)
+    map =
+      n: 'down'
+      s: 'up'
+      e: 'left'
+      w: 'right'
+
+    map[dropdown.direction]
 
 Template.dropdownTrigger.rendered = ->
   this.$('*').first().addClass(DROPDOWN_TRIGGER.slice(1))
@@ -196,20 +214,36 @@ positionDropdown = (key, element) ->
     align = dropdown.align
     offLeft = dropdown.left
     offTop = dropdown.top
+    direction = dropdown.direction
 
     ref = $el.position()
+    position = {}
 
-    if align is 'left'
-      left = ref.left - offLeft
-    else if align is 'right'
-      left = ref.left + $el.outerWidth() - $dropdown.outerWidth() - offLeft
-    else
-      left = center horizontally $dropdown, $el
-      left += offLeft
+    position.y = switch direction
+      when 'w', 'e'
+        if align is 'left'
+          ref.top - $dropdown.outerHeight() + $el.outerHeight() + offTop
+        else if align is 'right'
+          ref.top + offTop
+        else
+          center(vertically $dropdown, $el) + offTop
 
-    top = ref.top + $el.outerHeight() + offTop
+      when 'n' then ref.top - $dropdown.outerHeight() + offTop
+      when 's' then ref.top + $el.outerHeight() + offTop
 
-    Dropdowns.setPosition(key, { y: top, x: left })
+    position.x = switch direction
+      when 'n', 's'
+        if align is 'left'
+          ref.left - offLeft
+        else if align is 'right'
+          ref.left + $el.outerWidth() - $dropdown.outerWidth() - offLeft
+        else
+          center(horizontally $dropdown, $el) + offLeft
+
+      when 'w' then ref.left - $dropdown.outerWidth() + offLeft
+      when 'e' then ref.left + $el.outerWidth() + offLeft
+
+    Dropdowns.setPosition(key, position)
 
 Template.dropdownTrigger.events(
   'click': (evt, tmpl) ->
