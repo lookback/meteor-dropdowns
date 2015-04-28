@@ -232,6 +232,7 @@ No CSS styling is provided with this dropdown package – it's up to you to styl
 
 ## Version history
 
+- `1.2.0` - Add support for dropdown *directions*. Note that this release removes the default top offset (`10px`).
 - `1.0.0` - Stable release.
 - `0.4.1`
   - **Fix:** The properties `x, y, top, left` are now flattened (before, they were in properties `position` and `offset` respectively).
