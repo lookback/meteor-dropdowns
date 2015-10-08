@@ -80,6 +80,7 @@ The `dropdown` helper takes additional arguments for positioning and custom clas
 - `top` - Top offset in pixels. Defaults to `0`.
 - `classes` - Additional class names for the dropdown. None as default.
 - `direction` - One of `n`, `s`, `e` or `w`. Where to position the dropdown around the element. Defaults to `s`.
+- `persistent` - Defaults to `false`. Set to `true` if you want the dropdown *not* to hide when clicking outside it (on `document`).
 
 ```html
 {{#dropdownTrigger name="testDropdown3"}}
@@ -216,8 +217,11 @@ Dropdowns.removeAll()
 # Manually set a position of a dropdown.
 Dropdowns.setPosition('name', {x: Number, y: Number})
 
-# Hide all dropdowns except for `name`.
+# Hide all dropdowns except for `name` (can also be an array of names).
 Dropdowns.hideAllBut('name')
+
+# Get names of all persistent dropdowns
+Dropdowns.getPersistentKeys()
 ```
 
 ### Animation
@@ -232,6 +236,7 @@ No CSS styling is provided with this dropdown package – it's up to you to styl
 
 ## Version history
 
+- `1.2.1` - Add `persistent` option.
 - `1.2.0` - Add support for dropdown *directions*. Note that this release removes the default top offset (`10px`).
 - `1.0.0` - Stable release.
 - `0.4.1`
