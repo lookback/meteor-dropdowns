@@ -15,6 +15,7 @@ Direction =
 Dropdown = (opts = {}) ->
   defaults =
     showing: false
+    persistent: false
     direction: Direction.SOUTH
     align: 'center'
     x: 0
@@ -32,6 +33,9 @@ Dropdown = (opts = {}) ->
       for prop of opts
         if Match.test prop, Match.OneOf('x', 'y', 'top', 'left')
           obj[prop] = toIntOr opts[prop], obj[prop]
+        else if prop is 'persistent'
+          # Convert to real bool
+          obj[prop] = opts[prop] is 'true'
         else
           if opts[prop] and _.isUndefined(opts[prop]) is false
             obj[prop] = opts[prop]
@@ -48,8 +52,11 @@ Dropdown = (opts = {}) ->
 DropdownsStruct = ->
   list = new ReactiveDict()
 
-  except = (key) ->
-    _.without(Object.keys(list.keys), key)
+  allKeys = ->
+    Object.keys(list.keys)
+
+  except = (keys) ->
+    _.without(allKeys(), keys...)
 
   get = (key) ->
     list.get(key)
@@ -87,7 +94,7 @@ DropdownsStruct = ->
       list.set(key, dropdown)
 
   hideAll = (keys) ->
-    keys = keys or Object.keys(list.keys)
+    keys = keys or allKeys()
     keys.forEach(hide)
 
   isShown = (key) ->
@@ -108,7 +115,7 @@ DropdownsStruct = ->
     list.set(key, null)
 
   removeAll = ->
-    Object.keys(list.keys).forEach(remove)
+    allKeys().forEach(remove)
 
   create: add
   get: get
@@ -120,7 +127,10 @@ DropdownsStruct = ->
   remove: remove
   removeAll: removeAll
   setPosition: setPosition
-  hideAllBut: (key) -> hideAll except key
+  hideAllBut: (keys) ->
+    notTheseKeys = if Array.isArray(keys) then keys else [keys]
+    hideAll except notTheseKeys
+  getPersistentKeys: -> allKeys().filter( (key) -> list.get(key).persistent)
 
 # Singleton
 Dropdowns = DropdownsStruct()
@@ -137,8 +147,8 @@ isActive = (name) ->
 # Positioning
 
 center = (args) ->
-	middle = args[0] + args[1] / 2
-	middle - args[2] / 2
+  middle = args[0] + args[1] / 2
+  middle - args[2] / 2
 
 horizontally = ($el, $reference) ->
   [$reference.position().left, $reference.outerWidth(), $el.outerWidth()]
@@ -150,7 +160,7 @@ vertically = ($el, $reference) ->
 
 Template.dropdown.created = ->
   # Build a dropdown from template attributes.
-  opts = _.pick(@data, 'align', 'top', 'left', 'direction')
+  opts = _.pick(@data, 'align', 'top', 'left', 'direction', 'persistent')
   Dropdowns.create(@data.name, opts)
 
 Template.dropdown.helpers
@@ -293,4 +303,6 @@ $ ->
     # De Morgan's Laws, baby.
     #   (!P ^ !Q) => !(P v Q)
     if not (isDropdown(el) or isTrigger(el))
-      Dropdowns.hideAll()
+      # Hide all dropdowns that haven't declared that they wanna
+      # be persistent in document clicks.
+      Dropdowns.hideAllBut(Dropdowns.getPersistentKeys())
