@@ -283,7 +283,7 @@ $ ->
       if isDropdown(el)
         return if isInput(el) and el.val() isnt ''
 
-        Dropdowns.hideAll()
+      Dropdowns.hideAll()
 
   $(document).on 'click', (evt) ->
     el = $(evt.target)
