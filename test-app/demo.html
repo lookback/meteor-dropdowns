@@ -27,6 +27,7 @@
       <li><a href="#markup-classes">Markup &amp; Classes</a></li>
       <li><a href="#helpers">Helpers</a></li>
       <li><a href="#data">Data Contexts</a></li>
+      <li><a href="#persistent">Persistent dropdowns</a></li>
       <li><a href="#api">API</a></li>
       <li><a href="#animation">Animation</a></li>
       <li><a href="#styling">Styling</a></li>
@@ -315,6 +316,24 @@ Template.testTemplate.helpers(
     <p>
       One can build more complex components from this simple dropdown concept, such as filterables.
     </p>
+
+    <h2 id="persistent">Persistent dropdowns</h2>
+
+    <p>
+      Dropdowns can be persistent too, which means they won't close when you click anywhere outside them. Like this:
+    </p>
+
+    <div class="dropdown-container test-area">
+      {{#dropdownTrigger name="persistentDropdown"}}
+        <button>Persistent dropdown</button>
+      {{/dropdownTrigger}}
+
+      {{#dropdown name="persistentDropdown" top="10" persistent="true"}}
+        <p>
+          This one is persistent.
+        </p>
+      {{/dropdown}}
+    </div>
 
     <h2 id="api">API</h2>
 

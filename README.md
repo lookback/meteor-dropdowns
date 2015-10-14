@@ -172,6 +172,22 @@ Template.testTemplate.helpers(
 
 One can build more complex components from this simple dropdown concept, such as [filterables](http://dropdowns.meteor.com/#data).
 
+### Persistent dropdowns
+
+Dropdowns can be persistent too, which means they won't close when you click anywhere outside them. It's done setting `persistent` to `true` on a dropdown template:
+
+```
+{{#dropdownTrigger name="persistentDropdown"}}
+  <button>Persistent dropdown</button>
+{{/dropdownTrigger}}
+
+{{#dropdown name="persistentDropdown" persistent="true"}}
+  <p>
+    This one is persistent.
+  </p>
+{{/dropdown}}
+```
+
 ### API
 
 This package exports a namespaced object: `Dropdowns`. By the power of reactivity, all dropdowns are based on an underlying data structure which stores its (quite minimal) state. When that data changes, for instance if the position is changed over an API call, the UI will react. The `Dropdowns` object has the following methods:
