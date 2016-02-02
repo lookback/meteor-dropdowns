@@ -1,4 +1,4 @@
-var where = 'client';
+const where = 'client';
 
 Package.describe({
   name: 'lookback:dropdowns',
@@ -9,21 +9,22 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.0.4');
+
   api.use('percolate:momentum@0.7.2', where);
   api.use([
     'underscore',
     'tracker',
-    'coffeescript',
+    'ecmascript',
     'jquery',
     'reactive-dict',
     'templating',
     'check'
   ], where);
 
-  api.add_files([
-    'transitions/default.coffee',
-    'dropdown.html',
-    'dropdown.coffee'
+  api.addFiles([
+    'transitions/default-transition.js',
+    'templates/dropdown.html',
+    'lib/dropdown.js'
   ], 'client');
 
   api.export('Dropdowns', where);
