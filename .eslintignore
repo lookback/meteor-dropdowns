@@ -1,2 +1,3 @@
 app/.meteor
 .npm/
+node_modules

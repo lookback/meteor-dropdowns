@@ -1,17 +1,31 @@
 {
+  "extends": [".eslintrc-meteor"],
+
+  "plugins": ["meteor"],
+
   "rules": {
     "brace-style": [2, "1tbs", { "allowSingleLine": true }],
     "strict": 0,
     "quotes": [2, "single"],
     "no-underscore-dangle": 0,
-    "curly": 0
-  },
+    "curly": 0,
+    "no-debugger": 1,
+    "no-multi-spaces": 0,
+    "no-unused-expressions": 1,
+    "no-unused-vars": 1,
+    "consistent-return": 0,
+    "no-console": 0,
 
-  "env": {
-    "browser": true,
-    "node": true,
-    "jquery": true,
-    "meteor": true
+    "meteor/no-blaze-lifecycle-assignment": 2,
+    "meteor/no-zero-timeout": 2,
+    "meteor/audit-argument-checks": 2,
+    "meteor/core": 2,
+    "meteor/pubsub": 2,
+    "meteor/methods": 2,
+    "meteor/check": 2,
+    "meteor/connections": 2,
+    "meteor/collections": 2,
+    "meteor/session": 2
   },
 
   "globals": {
