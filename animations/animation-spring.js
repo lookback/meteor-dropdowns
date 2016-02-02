@@ -1,5 +1,5 @@
 /* eslint no-undef: 0 */
-Momentum.registerPlugin('dropdown', (options) => {
+Momentum.registerPlugin('spring', (options) => {
   options = _.extend({}, options, {
     duration: {
       in: 400,

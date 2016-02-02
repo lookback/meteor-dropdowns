@@ -335,11 +335,11 @@ Template.testTemplate.helpers(
       {{/dropdown}}
     </div>
 
-    <h2 id="api">API</h2>
-
-    <p>This package exports a namespaced object: <code>Dropdowns</code>. By the power of reactivity, all dropdowns are based on an underlying data structure which stores its (quite minimal) state. When that data changes, for instance if the position is changed over an API call, the UI will react. The <code>Dropdowns</code> object has the following methods:</p>
-
     {{#markdown}}
+## API
+
+This package exports a namespaced object: `Dropdowns`. By the power of reactivity, all dropdowns are based on an underlying data structure which stores its (quite minimal) state. When that data changes, for instance if the position is changed over an API call, the UI will react. The `Dropdowns` object has the following methods:
+
 ```coffeescript
 # The foundational dropdown struct:
 {
@@ -386,15 +386,52 @@ Dropdowns.hideAllBut('name')
 ```
     {{/markdown}}
 
-    <h2 id="animation">Animation</h2>
+    {{#markdown}}
+## Animations
 
-    <p>The dropdown uses the excellent <a href="https://github.com/percolatestudio/meteor-momentum/">Momentum</a> package for creating natural animations when toggled. This is built on Meteor's UI hooks, since the dropdown content actually is removed from the DOM when hidden.</p>
+The dropdown uses the excellent [Momentum](https://github.com/percolatestudio/meteor-momentum/) package for creating natural animations when toggled. This is built on Meteor's UI hooks, since the dropdown content actually is removed from the DOM when hidden.
 
-    <p>For now, a default transition is bundled. In the future, users of this package will be able to write their own Momentum plugins and provide to the dropdown helper.</p>
+Two animations are included: `spring` and `appear`.
 
-    <h2 id="styling">Styling</h2>
+- `spring` is making the dropdown appear with a spring physics effect.
+- `appear` is simply showing and hiding the dropdown as-is.
 
-    <p>No CSS styling is provided with this dropdown package – it's up to you to style the dropdown according to your needs. For a complete styling example, check out the <code>_dropdowns.scss</code> file in this <a href="https://github.com/lookback/meteor-dropdowns/tree/master/test-app">repository</a>.</p>
+### Changing default animation
+
+You can change the default animation for *all* dropdowns by defining a new Momentum plugin and refer to it by its string name:
+
+```js
+Dropdowns.animations.default = 'name-of-momentum-plugin';
+```
+
+### Changing animation for a single dropdown
+
+You can also change animation per dropdown basis. Just specify the `animation` attribute for the `dropdown` helper.
+{{/markdown}}
+
+<div class="test-area dropdown-container">
+  {{#dropdownTrigger name="appearAnimation"}}
+    <button>Non-standard animation</button>
+  {{/dropdownTrigger}}
+
+  {{#dropdown name="appearAnimation" animation="appear"}}
+    <p>Hey there.</p>
+  {{/dropdown}}
+</div>
+
+<pre><code>&#123;&#123;#dropdownTrigger name="appearDropdown"&#125;&#125;
+  &lt;button&gt;Non-standard animation&lt;/button&gt;
+&#123;&#123;/dropdownTrigger&#125;&#125;
+
+&#123;&#123;#dropdown name="appearDropdown" animation="appear"&#125;&#125;
+  &lt;p&gt;Hey there.&lt;/p&gt;
+&#123;&#123;/dropdown&#125;&#125;</code></pre>
+
+{{#markdown}}
+## Styling
+
+No CSS styling is provided with this dropdown package – it's up to you to style the dropdown according to your needs. For a complete styling example, check out the `_dropdowns.scss` file in this [repository](https://github.com/lookback/meteor-dropdowns/tree/master/test-app).
+    {{/markdown}}
   </section>
 
   <footer role="contentInfo">

@@ -10,7 +10,6 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.0.4');
 
-  api.use('percolate:momentum@0.7.2', where);
   api.use([
     'underscore',
     'tracker',
@@ -18,15 +17,18 @@ Package.onUse(function(api) {
     'jquery',
     'reactive-dict',
     'templating',
-    'check'
+    'check',
+    'percolate:momentum@0.7.2'
   ], where);
 
   api.addFiles([
-    'transitions/default-transition.js',
+    'animations/animation-spring.js',
+    'animations/animation-appear.js',
     'templates/dropdown.html',
     'lib/dropdown.js'
   ], 'client');
 
+  api.imply('percolate:momentum@0.7.2', where);
   api.export('Dropdowns', where);
 });
 

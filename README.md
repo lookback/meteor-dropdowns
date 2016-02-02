@@ -240,11 +240,38 @@ Dropdowns.hideAllBut('name')
 Dropdowns.getPersistentKeys()
 ```
 
-### Animation
+### Animations
 
 The dropdown uses the excellent [Momentum](https://github.com/percolatestudio/meteor-momentum/) package for creating natural animations when toggled. This is built on Meteor's UI hooks, since the dropdown content actually is removed from the DOM when hidden.
 
-For now, a default transition is bundled. In the future, users of this package will be able to write their own Momentum plugins and provide to the dropdown helper.
+Two animations are included: `spring` and `appear`.
+
+- `spring` is making the dropdown appear with a spring physics effect.
+- `appear` is simply showing and hiding the dropdown as-is.
+
+### Changing default animation
+
+You can change the default animation for *all* dropdowns by defining a new Momentum plugin and refer to it by its string name:
+
+```js
+Dropdowns.animations.default = 'name-of-momentum-plugin';
+```
+
+### Changing animation for a single dropdown
+
+You can also change animation per dropdown basis. Just specify the `animation` attribute for the `dropdown` helper.
+
+```html
+<div class="test-area dropdown-container">
+  {{#dropdownTrigger name="appearAnimation"}}
+    <button>Non-standard animation</button>
+  {{/dropdownTrigger}}
+
+  {{#dropdown name="appearAnimation" animation="appear"}}
+    <p>Hey there.</p>
+  {{/dropdown}}
+</div>
+```
 
 ### Styling
 
