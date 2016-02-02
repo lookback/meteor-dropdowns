@@ -6,8 +6,6 @@
 
 meteor-platform
 lookback:dropdowns
-sanjo:jasmine
-velocity:html-reporter
 coffeescript
 fourseven:scss
 markdown
