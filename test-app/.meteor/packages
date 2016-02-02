@@ -5,9 +5,9 @@
 # but you can also edit it by hand.
 
 meteor-platform
-lookback:dropdowns
 coffeescript
 fourseven:scss
 markdown
 simple:highlight.js
 reactive-var
+lookback:dropdowns

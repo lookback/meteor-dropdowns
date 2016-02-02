@@ -3,7 +3,7 @@ const where = 'client';
 Package.describe({
   name: 'lookback:dropdowns',
   summary: 'Reactive dropdowns for Meteor.',
-  version: '1.2.1',
+  version: '1.3.0',
   git: 'http://github.com/lookback/meteor-dropdowns'
 });
 
@@ -26,7 +26,7 @@ Package.onUse(function(api) {
     'animations/animation-appear.js',
     'templates/dropdown.html',
     'lib/dropdown.js'
-  ], 'client');
+  ], where);
 
   api.imply('percolate:momentum@0.7.2', where);
   api.export('Dropdowns', where);

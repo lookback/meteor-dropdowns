@@ -279,6 +279,7 @@ No CSS styling is provided with this dropdown package – it's up to you to styl
 
 ## Version history
 
+- `1.3.0` - Add support for [custom animations](#animations).
 - `1.2.1` - Add `persistent` option.
 - `1.2.0` - Add support for dropdown *directions*. Note that this release removes the default top offset (`10px`).
 - `1.0.0` - Stable release.
