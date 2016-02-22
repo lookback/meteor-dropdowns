@@ -231,6 +231,7 @@
   class=&quot;dropdown test-dropdown4 custom-class&quot;
   id=&quot;test-dropdown4&quot;
   style=&quot;position: absolute; left: XXpx; top: XXpx;&quot;
+  data-dropdown-key=&quot;testDropdown4&quot;
   data-dropdown-align=&quot;center&quot;
   data-dropdown-left=&quot;10&quot;
   data-dropdown-top=&quot;20&quot;&gt;
@@ -241,7 +242,7 @@
 &lt;/div&gt;</code></pre>
 
     <p>
-      As shown, <code>align</code>, <code>left</code> and <code>top</code> produces corresponding <code>data-dropdown-</code> attributes in the markup, handy for custom CSS styling. The dropdown's name will be the <code>id</code> attribute and applied as a class.
+      As shown, <code>name</code>, <code>align</code>, <code>left</code> and <code>top</code> produces corresponding <code>data-dropdown-</code> attributes in the markup, handy for custom CSS styling. The dropdown's name will be the <code>id</code> attribute and applied as a class.
     </p>
 
     <p>It is <strong>recommended</strong> to wrap both the trigger and dropdown markup in a container element with relative positioning.</p>
@@ -341,14 +342,18 @@ Template.testTemplate.helpers(
 This package exports a namespaced object: `Dropdowns`. By the power of reactivity, all dropdowns are based on an underlying data structure which stores its (quite minimal) state. When that data changes, for instance if the position is changed over an API call, the UI will react. The `Dropdowns` object has the following methods:
 
 ```coffeescript
-# The foundational dropdown struct:
+# This is the struct for a "dropdown" object, returned
+# by Dropdowns.get('key')
 {
+  name: 'key'
   showing: false
   align: 'center'
   x: 0
   y: 0
   top: 10
   left: 0
+  persistent: false
+  element: -> # jQuery reference to the dropdown component in the DOM.
 }
 
 # Manually create a dropdown with a name.
