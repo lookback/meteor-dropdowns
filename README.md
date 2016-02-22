@@ -272,7 +272,7 @@ Dropdowns.remove()
 # Destroy all dropdowns.
 Dropdowns.removeAll()
 
-# Manually set a position of a dropdown.
+# Manually set a position of a dropdown. Both x and y are optional.
 Dropdowns.setPosition('name', {x: Number, y: Number})
 
 # Hide all dropdowns except for `name` (can also be an array of names).
@@ -284,6 +284,11 @@ Dropdowns.getPersistentKeys()
 
 ## Version history
 
+- `1.4.0`
+  - Use `data-dropdown-key` attribute when positioning dropdowns, instead of `id`.
+  - Expose dropdown name on the `name` property of a dropdown object.
+  - Add `element()` function on dropdown objects returned from `Dropdowns.get()`. `element()` returns a
+  jQuery reference to the DOM element for the dropdown.
 - `1.3.0` - Add support for [custom animations](#animations).
 - `1.2.1` - Add `persistent` option.
 - `1.2.0` - Add support for dropdown *directions*. Note that this release removes the default top offset (`10px`).
