@@ -280,10 +280,14 @@ Dropdowns.hideAllBut('name')
 
 # Get names of all persistent dropdowns
 Dropdowns.getPersistentKeys()
+
+# Returns a dict of all dropdowns
+Dropdowns.all()
 ```
 
 ## Version history
 
+- `1.4.1` - Expose `Dropdowns.all()`.
 - `1.4.0`
   - Use `data-dropdown-key` attribute when positioning dropdowns, instead of `id`.
   - Expose dropdown name on the `name` property of a dropdown object.

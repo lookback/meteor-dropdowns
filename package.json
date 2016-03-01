@@ -1,6 +1,6 @@
 {
   "name": "lookback-dropdowns",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "",
   "scripts": {
     "lint": "node_modules/.bin/eslint . || true",
