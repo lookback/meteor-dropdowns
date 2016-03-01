@@ -1,10 +1,17 @@
-dependencies:
-  override:
-    - curl https://install.meteor.com | /bin/sh
-    - npm install spacejam
+machine:
+  # Meteor requires an older version of node
+  node:
+    version: 0.10.40
 
-test:
+dependencies:
+  cache_directories:
+    - "~/.meteor"
+    - "~/.npm"
   override:
-    - ./node_modules/spacejam/bin/spacejam test-packages ./
-    - meteor --test:
-        pwd: "test-app"
+    # -- CACHE METEOR --
+    # Restore the meteor symlink
+    - if [ -d ~/.meteor ]; then sudo ln -s ~/.meteor/meteor /usr/local/bin/meteor; fi
+    # Install Meteor (if not restored from cache)
+    - if [ ! -e ~/.meteor/meteor ]; then curl https://install.meteor.com | /bin/sh; fi
+
+    - npm install -g spacejam

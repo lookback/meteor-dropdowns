@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "lint": "node_modules/.bin/eslint . || true",
-    "test": "meteor test-packages --port 3010 --driver-package=practicalmeteor:mocha ./"
+    "test": "spacejam test-packages --driver-package=practicalmeteor:mocha-console-runner ./",
+    "test-runner": "meteor test-packages --port 3010 --driver-package=practicalmeteor:mocha ./"
   },
   "repository": {
     "type": "git",
