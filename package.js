@@ -39,7 +39,8 @@ Package.onTest(function(api) {
     'check',
     'tracker',
     'lookback:dropdowns',
-    'practicalmeteor:mocha'
+    'practicalmeteor:mocha',
+    'practicalmeteor:mocha-console-runner'
   ], where);
 
   api.addFiles('tests/DropdownTest.coffee', where);
