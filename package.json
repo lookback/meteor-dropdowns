@@ -3,7 +3,8 @@
   "version": "1.4.0",
   "description": "",
   "scripts": {
-    "lint": "node_modules/.bin/eslint . || true"
+    "lint": "node_modules/.bin/eslint . || true",
+    "test": "meteor test-packages --port 3010 --driver-package=practicalmeteor:mocha ./"
   },
   "repository": {
     "type": "git",
