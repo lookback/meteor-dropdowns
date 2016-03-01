@@ -308,17 +308,10 @@ Dropdowns.getPersistentKeys()
 
 ## Tests
 
-This package's API interface (methods on the `Dropdown` object) is unit tested in TinyTest (using MUnit). Those tests reside in `/tests`.
+This package's API interface (methods on the `Dropdown` object) is unit tested. Those tests reside in `/tests`.
 
 ```bash
-meteor test-packages ./
-```
-
-Furthermore, there are Jasmine Velocity integration tests in the demo app: `/test-app/tests`. These tests test the UI and template integration.
-
-```bash
-cd test-app
-meteor --test
+npm test
 ```
 
 ## Contributions

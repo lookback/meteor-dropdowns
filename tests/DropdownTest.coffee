@@ -2,6 +2,9 @@ Should = should()
 
 describe 'Dropdowns', ->
 
+  beforeEach ->
+    Dropdowns.removeAll()
+
   it 'should exist', ->
     Dropdowns.should.exists
 
@@ -39,7 +42,7 @@ describe 'Dropdowns', ->
       dropdown = Dropdowns.get 'foo'
       dropdown.align.should.equal 'center'
       dropdown.showing.should.be.false
-      dropdown.top.should.equal 10
+      dropdown.top.should.equal 0
 
     it 'should use options when creating', ->
       Dropdowns.create 'foo', { top: 20, left: 10, align: 'right' }
@@ -58,16 +61,28 @@ describe 'Dropdowns', ->
       dropdown.top.should.be.a 'number'
       dropdown.top.should.equal 20
 
-    it 'should throw error if called with incorrect align', (test) ->
-      test.throws ->
+    it 'should throw error if called with incorrect align', ->
+      (() ->
         Dropdowns.create 'foo', { align: 'Foo' }
+      ).should.throw
 
-    it 'should fallback to defaults if called with non-number parameters', (test) ->
+    it 'should fallback to defaults if called with non-number parameters', ->
       Dropdowns.create 'foo', { top: 'Foo', showing: true }
 
       dropdown = Dropdowns.get 'foo'
-      dropdown.top.should.equal 10    # Fallback for 'top'
+      dropdown.top.should.equal 0    # Fallback for 'top'
       dropdown.showing.should.be.true # .. but not for 'showing'
+
+  describe '#all', ->
+
+    it 'should return all dropdowns as a dict', ->
+      Dropdowns.create 'foo'
+      Dropdowns.create 'foo2'
+
+      dropdowns = Dropdowns.all()
+      Object.keys(dropdowns).length.should.equal 2
+      dropdowns.foo.should.be.an 'object'
+      dropdowns.foo2.should.be.an 'object'
 
   describe '#hide', ->
 
@@ -155,11 +170,11 @@ describe 'Dropdowns', ->
       dropdown.x.should.equal 10
       dropdown.y.should.equal 20
 
-    it 'should only accept numbers', (test) ->
-      test.throws ->
+    it 'should only accept numbers', ->
+      (() ->
         Dropdowns.create 'Foo'
         Dropdowns.setPosition x: 'Lol'
-      , Match.Error
+      ).should.throw Match.Error
 
   describe '#hideAllBut', ->
 
