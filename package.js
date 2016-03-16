@@ -39,7 +39,7 @@ Package.onTest(function(api) {
     'check',
     'tracker',
     'lookback:dropdowns',
-    'practicalmeteor:mocha',
+    'practicalmeteor:mocha@2.1.0_7',
     'practicalmeteor:mocha-console-runner'
   ], where);
 
