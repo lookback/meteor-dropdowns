@@ -14,8 +14,6 @@ meteor add lookback:dropdowns
 
 ## Usage
 
-Be sure to check out the [demo](http://dropdowns.meteor.com) for samples.
-
 ### tldr;
 
 ```html
