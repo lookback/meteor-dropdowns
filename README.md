@@ -288,6 +288,7 @@ Dropdowns.positionDropdown('name', document.getElementById('reference'))
 
 ## Version history
 
+- `1.4.2` - Expose `Dropdowns.positionDropdown()`.
 - `1.4.1` - Expose `Dropdowns.all()`.
 - `1.4.0`
   - Use `data-dropdown-key` attribute when positioning dropdowns, instead of `id`.
