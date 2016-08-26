@@ -281,6 +281,9 @@ Dropdowns.getPersistentKeys()
 
 # Returns a dict of all dropdowns
 Dropdowns.all()
+
+# Position dropdown <name> around a DOM element <reference>
+Dropdowns.positionDropdown('name', document.getElementById('reference'))
 ```
 
 ## Version history
