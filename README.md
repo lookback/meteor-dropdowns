@@ -71,6 +71,10 @@ Note that `dropdownTrigger` needs the template name in the `template` argument.
 
 ### Additional arguments
 
+The `dropdownTrigger` accepts these additional arguments:
+
+- `hideOthers` - Defaults to `true`. If `false`, other visible dropdowns won't be hidden when a dropdown is toggled.
+
 The `dropdown` helper takes additional arguments for positioning and custom classes. The names are:
 
 - `align` - Defaults to `center`. Can also be `left` or `right`.
@@ -79,7 +83,6 @@ The `dropdown` helper takes additional arguments for positioning and custom clas
 - `classes` - Additional class names for the dropdown. None as default.
 - `direction` - One of `n`, `s`, `e` or `w`. Where to position the dropdown around the element. Defaults to `s`.
 - `persistent` - Defaults to `false`. Set to `true` if you want the dropdown *not* to hide when clicking outside it (on `document`).
-- `hideOthers` - Defaults to `true`. If `false`, other visible dropdowns won't be hidden when a dropdown is toggled.
 
 ```html
 {{#dropdownTrigger name="testDropdown3"}}
