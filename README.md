@@ -292,6 +292,7 @@ Dropdowns.positionDropdown('name', document.getElementById('reference'))
 
 ## Version history
 
+- `1.5.1` - Use `keyup` event for closing all dropdowns.
 - `1.5.0` - Introduce `hideOthers` template option on a dropdown.
 - `1.4.2` - Expose `Dropdowns.positionDropdown()`.
 - `1.4.1` - Expose `Dropdowns.all()`.
